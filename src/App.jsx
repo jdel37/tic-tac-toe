@@ -84,7 +84,7 @@ const restart =()=>
     
     <main className='board'>
       <section>
-      <h1>Tic Tac Toe</h1>
+      <h1 className="text-3xl font-bold underline">Tic Tac Toe</h1>
     
     <section className='game'>
       {board.map((_, index) => {
