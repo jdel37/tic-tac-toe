@@ -110,7 +110,7 @@ const restart =()=>
      
   
       <aside className='ml-[40px] m-auto'>
-    <button onClick={deleteBoard} className='mb-[20px]'>Restart</button>
+    <button onClick={deleteBoard} className='mb-[20px] '>Restart</button>
     <button onClick={restart} className='mb-[20px] ml-[15px]'>Restart count</button>
     <Counter countO={countO} countX={countX}/>
     </aside>
