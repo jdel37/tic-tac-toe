@@ -52,7 +52,7 @@ function App() {
     setTurns(newTurn);
     const newWinner = checkWinner(newBoard)
    window.localStorage.setItem('board',JSON.stringify(newBoard))
-   window.localStorage.setItem('turn',turns)
+ 
    
     if(newWinner)
     {
@@ -84,8 +84,7 @@ setWinner(false)
 
   const deleteBoard=()=>
   {
-    window.localStorage.setItem('counto',countO)
-    window.localStorage.setItem('countx',countX)
+   
     setBoard(Array(9).fill(null))
     setTurns(TURNS.X)
     setWinner(null)
@@ -100,8 +99,8 @@ setWinner(false)
     setCountX(0);
   }
   return (
-    
-    <main className='board'>
+    <main className='bg-[#272727] shadow-[0px_5px_15px_rgba(0, 0, 0, 0.35)] p-[20px] rounded-md m-[20px]' >
+<main className='board'>
       <section>
       <h1 className="text-3xl font-bold underline">Tic Tac Toe</h1>
     
@@ -136,6 +135,8 @@ setWinner(false)
    
     </main>
    
+    </main>
+    
   );
 }
 
