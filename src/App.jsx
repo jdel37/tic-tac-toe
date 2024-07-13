@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 import './App.css';
 import confetti from 'canvas-confetti'
 import {Square} from './components/Square'
@@ -13,16 +14,24 @@ function App() {
     const boardFromStorage=window.localStorage.getItem('board')
     return boardFromStorage ?JSON.parse(boardFromStorage):
     Array(9).fill(null)});
-  const [turns, setTurns] = useState(()=>{
-    const turnFromStorage = window.localStorage.getItem('turn')
-    return turnFromStorage?turnFromStorage:TURNS.X});
+    const [turns, setTurns] = useState(() => {
+      const turnFromStorage = window.localStorage.getItem('turn');
+      if (turnFromStorage) {
+        return turnFromStorage === 'X'? TURNS.X : TURNS.O;
+      }
+      return TURNS.X; // default to X if no storage value
+    });
+    
+    useEffect(() => {
+      window.localStorage.setItem('turn', turns === TURNS.X? 'X' : 'O');
+    }, [turns]);
   const [winner, setWinner] = useState(null)
   const[countX,setCountX]=useState(()=>{
     const countFromStorage1=window.localStorage.getItem('countx')
-    return  parseInt(countFromStorage1)??0})
+    return  parseInt(countFromStorage1)??1})
   const[countO,setCountO]=useState(()=>{
     const countFromStorage2=window.localStorage.getItem('counto')
-    return parseInt(countFromStorage2)??0
+    return parseInt(countFromStorage2)??1
     })
  
   const updateBoard = (index) => {
