@@ -26,13 +26,22 @@ function App() {
       window.localStorage.setItem('turn', turns === TURNS.X? 'X' : 'O');
     }, [turns]);
   const [winner, setWinner] = useState(null)
-  const[countX,setCountX]=useState(()=>{
-    const countFromStorage1=window.localStorage.getItem('countx')
-    return  parseInt(countFromStorage1)??1})
-  const[countO,setCountO]=useState(()=>{
-    const countFromStorage2=window.localStorage.getItem('counto')
-    return parseInt(countFromStorage2)??1
-    })
+  const [countX, setCountX] = useState(() => {
+    const countFromStorage1 = window.localStorage.getItem('countx');
+    return parseInt(countFromStorage1) ?? 0;
+  });
+  
+  const [countO, setCountO] = useState(() => {
+    const countFromStorage2 = window.localStorage.getItem('counto');
+    return parseInt(countFromStorage2) ?? 0;
+  });
+  
+  useEffect(() => {
+    window.localStorage.setItem('countx', countX);
+    window.localStorage.setItem('counto', countO);
+  }, [countX, countO]);
+  
+ 
  
   const updateBoard = (index) => {
     if (board[index]||winner) return; // Do nothing if the square is already filled
@@ -84,11 +93,12 @@ setWinner(false)
     window.localStorage.removeItem('board')
     window.localStorage.removeItem('turn')
   }
-const restart =()=>
-{
-  setCountO(0)
-  setCountX(0)
-}
+  const restart = () => {
+    window.localStorage.removeItem('countx');
+    window.localStorage.removeItem('counto');
+    setCountO(0);
+    setCountX(0);
+  }
   return (
     
     <main className='board'>
